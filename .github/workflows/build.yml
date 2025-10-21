@@ -12,6 +12,7 @@ jobs:
         with:
           profile: minimal
           toolchain: stable
+          target: armv7-unknown-linux-musleabihf
           override: true
           components: rustfmt, clippy
       - name: Run cargo fmt
