@@ -1,6 +1,6 @@
 # rpi-led
 
-Raspberry PI Neopixel helper.
+Raspberry Pi Neopixel helper
 
 ## License
 

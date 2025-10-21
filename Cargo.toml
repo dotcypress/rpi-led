@@ -1,6 +1,6 @@
 [package]
 name = "rpi-led"
-description = "Raspberry PI Neopixel helper"
+description = "Raspberry Pi Neopixel helper"
 authors = ["Vitaly Domnikov <oss@vitaly.codes>"]
 license = "MIT/Apache-2.0"
 readme = "readme.md"
