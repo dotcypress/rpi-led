@@ -42,10 +42,14 @@ jobs:
         with:
           command: install
           args: --git https://github.com/cross-rs/cross cross
-      - name: ARMv7 Build
+      - name: ARMv7 RGB Build
         run: cross build --release --target=armv7-unknown-linux-musleabihf
-      - name: Copy ARMv7 binary
-        run: cp -f ./target/armv7-unknown-linux-musleabihf/release/rpi-led rpi-led
+      - name: Copy ARMv7 RGB binary
+        run: cp -f ./target/armv7-unknown-linux-musleabihf/release/rpi-led rpi-led-rgb
+      - name: ARMv7 GRB Build
+        run: cross build --release --features=grb --target=armv7-unknown-linux-musleabihf
+      - name: Copy ARMv7 GRB binary
+        run: cp -f ./target/armv7-unknown-linux-musleabihf/release/rpi-led rpi-led-grb
       - name: Compress ARMv7 Build
         uses: a7ul/tar-action@v1.1.0
         with:
@@ -54,7 +58,8 @@ jobs:
             ./readme.md
             ./LICENSE-MIT
             ./LICENSE-APACHE
-            ./rpi-led
+            ./rpi-led-rgb
+            ./rpi-led-grb
           outPath: rpi-led_${{ github.ref_name }}.armv7.tar.gz
       - name: Upload Build Artifacts
         uses: actions/upload-artifact@v4
