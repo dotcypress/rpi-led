@@ -11,11 +11,18 @@ fn main() -> Result<(), Box<dyn Error>> {
         let r = (color >> 16) as u8;
         let g = (color >> 8) as u8;
         let b = color as u8;
+
         #[cfg(not(feature = "grb"))]
         let color = RGB8::new(r, g, b);
         #[cfg(feature = "grb")]
         let color = RGB8::new(g, r, b);
-        let spi = Spi::new(Bus::Spi0, SlaveSelect::Ss0, 4_200_000, Mode::Mode0)?;
+
+        #[cfg(not(feature = "spi1"))]
+        let bus = Bus::Spi0;
+        #[cfg(feature = "spi1")]
+        let bus = Bus::Spi1;
+
+        let spi = Spi::new(bus, SlaveSelect::Ss0, 4_200_000, Mode::Mode0)?;
         Ws2812::new(spi).write([color])?;
     }
     Ok(())
